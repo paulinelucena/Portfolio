@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates & Achievements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Light Mode Variables */
+            --bg-body: #f8f6ff;
+            --bg-gradient: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --text-main: #2d264b;
+            --text-sub: #6d28d9;
+            --accent: #7c3aed;
+            --blob-1: #d8b4fe;
+            --blob-2: #c084fc;
+            --shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Mode Variables (Default on load) */
+            --bg-body: #0f0c1d;
+            --bg-gradient: linear-gradient(135deg, #0f0c1d 0%, #1a162e 100%);
+            --card-bg: rgba(30, 27, 46, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f3f0ff;
+            --text-sub: #a78bfa;
+            --accent: #8b5cf6;
+            --blob-1: #4c1d95;
+            --blob-2: #2e1065;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-body);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Blobs */
+        .blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: var(--blob-1);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.5;
+            animation: move 20s infinite alternate;
+        }
+        .blob-2 {
+            background: var(--blob-2);
+            right: -100px;
+            top: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* --- Header & Navigation Elements --- */
+        .top-nav {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left-header-box {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Arrow Button Configuration */
+        .back-arrow-btn {
+            text-decoration: none;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--accent);
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .back-arrow-btn:hover {
+            transform: scale(1.05) translateX(-3px);
+            border-color: var(--accent);
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--accent), var(--text-sub));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 12px 18px;
+            border-radius: 15px;
+            cursor: pointer;
+            color: var(--accent);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Grid & Cards --- */
+        .grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .cert-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: #e5e7eb;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .cert-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .cert-card:hover .cert-image-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .cert-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(124, 58, 237, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .cert-card:hover .cert-overlay {
+            opacity: 1;
+        }
+
+        .cert-overlay span {
+            background: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Lightbox --- */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 12, 29, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(15px);
+        }
+
+        .modal.open { display: flex; }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.3);
+            border: 4px solid var(--accent);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="blob"></div>
+    <div class="blob blob-2"></div>
+
+    <header class="top-nav">
+        <div class="left-header-box">
+            <a href="Pauline Portfolio V2.html" class="back-arrow-btn" title="Back to Portfolio">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1 class="header-title">All Certificates</h1>
+        </div>
+        
+        <button id="theme-toggle" title="Toggle Light Mode">
+            <i class="fas fa-sun"></i>
+        </button>
+    </header>
+
+    <main class="grid-container">
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 1.png" alt="Certificate 1">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 2.png" alt="Certificate 2">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 3.png" alt="Certificate 3">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 4.jpg" alt="Certificate 4">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 5.png" alt="Certificate 5">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 6.jpg" alt="Certificate 6">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 7.JPG" alt="Certificate 7">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 8.png" alt="Certificate 8">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-image-wrapper" onclick="openLightbox(this)">
+                <img src="C:/Users/pauline/Desktop/Upskilling/Portfolio/Ecert 9.png" alt="Certificate 9">
+                <div class="cert-overlay"><span><i class="fas fa-expand"></i> View Certificate</span></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="lightbox" class="modal" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="lightbox-img">
+    </div>
+
+    <script>
+        // Dark Mode Logic (Adjusted for Default Dark preference)
+        const body = document.body;
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                themeToggle.setAttribute('title', 'Toggle Light Mode');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                themeToggle.setAttribute('title', 'Toggle Dark Mode');
+            }
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(wrapperElement) {
+            const imgSrc = wrapperElement.querySelector('img').src;
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('open');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+        }
+    </script>
+</body>
+</html>
