@@ -54,41 +54,41 @@
         }
 
         /* ============================================================
-           LIGHT MODE — GOLDEN HOUR EDITORIAL
-           Warm ivory + soft gold + blush + deep plum
+           LIGHT MODE — VIOLET LUXE EDITORIAL
+           Soft lavender mist + deep violet + fuchsia aurora + pearl white
         ============================================================ */
         body.light-mode {
-            /* Warm ivory-gold palette */
-            --bg-body:    #fdf6ec;
-            --bg-hero:    linear-gradient(135deg, #fff8f0 0%, #fdf0e0 40%, #fae8d8 100%);
-            --bg-card:    rgba(255,255,255,0.9);
-            --bg-card2:   rgba(255,248,240,0.8);
-            --bg-contact: linear-gradient(135deg, #2d1a00 0%, #5c3100 50%, #8b4513 100%);
-            --bg-footer:  #1a0d00;
+            --violet:     #4a1d96;
+            --iris:       #6d28d9;
+            --lavender:   #7c3aed;
+            --aurora:     #a855f7;
+            --pink:       #d946ef;
 
-            --text-body:  #1a0d00;
-            --text-muted: #6b3a1f;
-            --text-dim:   rgba(107,58,31,0.65);
-            --text-hero:  #1a0d00;
-            --text-hero-sub: rgba(90,45,10,0.72);
+            --bg-body:    #f5f0ff;
+            --bg-hero:    linear-gradient(135deg, #faf7ff 0%, #f0ebff 45%, #ede4ff 100%);
+            --bg-card:    rgba(255,255,255,0.88);
+            --bg-card2:   rgba(245,240,255,0.8);
+            --bg-contact: linear-gradient(135deg, #1e0050 0%, #3b0764 50%, #581c87 100%);
+            --bg-footer:  #0f0025;
 
-            --border:     rgba(180,100,30,0.18);
-            --border-card: rgba(180,100,30,0.13);
+            --text-body:  #1e0050;
+            --text-muted: #5b21b6;
+            --text-dim:   rgba(91,33,182,0.6);
+            --text-hero:  #1e0050;
+            --text-hero-sub: rgba(60,20,130,0.68);
 
-            --bg-about:   rgba(245,195,120,0.08);
-            --bg-services: rgba(245,195,120,0.05);
+            --border:     rgba(109,40,217,0.16);
+            --border-card: rgba(109,40,217,0.11);
 
-            --nav-bg:     rgba(253,246,236,0.88);
-            --nav-border: rgba(180,100,30,0.15);
-            --nav-link:   rgba(90,45,10,0.65);
-            --nav-scrolled: rgba(253,246,236,0.96);
+            --bg-about:   rgba(124,58,237,0.05);
+            --bg-services: rgba(168,85,247,0.04);
 
-            /* Override brand accents for warm mode */
-            --iris:       #b45309;
-            --lavender:   #d97706;
-            --aurora:     #f59e0b;
+            --nav-bg:     rgba(245,240,255,0.88);
+            --nav-border: rgba(109,40,217,0.14);
+            --nav-link:   rgba(60,20,130,0.6);
+            --nav-scrolled: rgba(250,247,255,0.96);
 
-            --canvas-tint-color: rgba(253,246,236,0.82);
+            --canvas-tint-color: rgba(245,240,255,0.55);
         }
 
         /* ============================================================
@@ -253,15 +253,15 @@
 
         .nav-links a:hover { color: var(--text-body); }
 
-        body.light-mode .nav-connect-btn { background: linear-gradient(135deg, #b45309, #f59e0b) !important; box-shadow: 0 0 20px rgba(245,158,11,0.3) !important; }
-        body.light-mode .btn-primary { background: linear-gradient(135deg, #b45309, #f59e0b); box-shadow: 0 4px 24px rgba(180,83,9,0.3); }
-        body.light-mode .btn-primary:hover { box-shadow: 0 12px 32px rgba(180,83,9,0.45); }
-        body.light-mode .section-label { color: #b45309; }
-        body.light-mode .section-label::before { background: #b45309; }
-        body.light-mode .section-title .accent { background: linear-gradient(90deg, #b45309, #f59e0b); -webkit-background-clip: text; background-clip: text; }
-        body.light-mode .about-highlight-block { border-left-color: #b45309; }
-        body.light-mode .about-highlight-block h4 { color: #b45309; }
-        body.light-mode .section-title::after { background: linear-gradient(90deg, #b45309, #f59e0b); }
+        body.light-mode .nav-connect-btn { background: linear-gradient(135deg, #6d28d9, #a855f7) !important; box-shadow: 0 0 22px rgba(168,85,247,0.35) !important; }
+        body.light-mode .btn-primary { background: linear-gradient(135deg, #6d28d9, #a855f7); box-shadow: 0 4px 28px rgba(109,40,217,0.35); }
+        body.light-mode .btn-primary:hover { box-shadow: 0 12px 36px rgba(109,40,217,0.5); }
+        body.light-mode .section-label { color: #7c3aed; }
+        body.light-mode .section-label::before { background: #7c3aed; }
+        body.light-mode .section-title .accent { background: linear-gradient(90deg, #7c3aed, #d946ef); -webkit-background-clip: text; background-clip: text; }
+        body.light-mode .about-highlight-block { border-left-color: #7c3aed; }
+        body.light-mode .about-highlight-block h4 { color: #6d28d9; }
+        body.light-mode .section-title::after { background: linear-gradient(90deg, #7c3aed, #d946ef); }
 
         .nav-connect-btn {
             background: linear-gradient(135deg, var(--iris), var(--aurora)) !important;
@@ -545,14 +545,14 @@
         }
 
         /* Rotating ring around photo */
-        body.light-mode .hero::before { background: radial-gradient(circle, rgba(245,158,11,0.18) 0%, transparent 70%); }
-        body.light-mode .hero::after  { background: radial-gradient(circle, rgba(251,146,60,0.12) 0%, transparent 70%); }
-        body.light-mode .hero-glow    { background: radial-gradient(circle, rgba(217,119,6,0.3) 0%, transparent 70%); }
-        body.light-mode .hero-ring    { border-color: rgba(180,83,9,0.2); }
-        body.light-mode .hero-ring::before { background: var(--aurora); box-shadow: 0 0 12px var(--aurora), 0 0 24px var(--aurora); }
-        body.light-mode .hero-ring-2  { border-color: rgba(245,158,11,0.12); }
-        body.light-mode .eyebrow-dot  { background: var(--aurora); }
-        body.light-mode .hero-eyebrow { background: rgba(180,83,9,0.1); border-color: rgba(180,83,9,0.25); color: #92400e; }
+        body.light-mode .hero::before { background: radial-gradient(circle, rgba(109,40,217,0.18) 0%, transparent 70%); }
+        body.light-mode .hero::after  { background: radial-gradient(circle, rgba(217,70,239,0.12) 0%, transparent 70%); }
+        body.light-mode .hero-glow    { background: radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%); }
+        body.light-mode .hero-ring    { border-color: rgba(109,40,217,0.28); }
+        body.light-mode .hero-ring::before { background: var(--aurora); box-shadow: 0 0 14px #a855f7, 0 0 28px #a855f7; }
+        body.light-mode .hero-ring-2  { border-color: rgba(217,70,239,0.14); }
+        body.light-mode .eyebrow-dot  { background: #d946ef; }
+        body.light-mode .hero-eyebrow { background: rgba(109,40,217,0.1); border-color: rgba(109,40,217,0.28); color: #5b21b6; }
 
         .hero-ring {
             position: absolute;
@@ -925,20 +925,20 @@
             background: rgba(124,58,237,0.05);
         }
         body.light-mode .service-column-card:hover {
-            border-color: rgba(180,83,9,0.3);
-            box-shadow: 0 24px 60px rgba(100,40,0,0.12), 0 0 0 1px rgba(180,83,9,0.12);
-            background: rgba(245,158,11,0.04);
+            border-color: rgba(109,40,217,0.3);
+            box-shadow: 0 24px 60px rgba(60,20,130,0.14), 0 0 0 1px rgba(109,40,217,0.12);
+            background: rgba(109,40,217,0.04);
         }
         body.light-mode .service-icon-wrap {
-            background: linear-gradient(135deg, rgba(217,119,6,0.15), rgba(245,158,11,0.1));
-            border-color: rgba(180,83,9,0.2);
-            color: #92400e;
+            background: linear-gradient(135deg, rgba(109,40,217,0.15), rgba(168,85,247,0.1));
+            border-color: rgba(109,40,217,0.2);
+            color: #5b21b6;
         }
         body.light-mode .service-column-card:hover .service-icon-wrap {
-            background: linear-gradient(135deg, #b45309, #d97706);
+            background: linear-gradient(135deg, #6d28d9, #a855f7);
             color: white;
         }
-        body.light-mode .service-task-item i { color: #b45309; }
+        body.light-mode .service-task-item i { color: #7c3aed; }
         body.light-mode .service-column-card:hover .service-task-item i { color: #d97706; }
         body.light-mode .service-column-card::before { background: linear-gradient(90deg, #b45309, #f59e0b); }
 
@@ -1087,9 +1087,9 @@
 
         .badge-container:hover .ribbon-badge::before { opacity: 1; }
         .badge-container:hover .ribbon-badge { color: white; }
-        body.light-mode .ribbon-badge { color: #92400e; border-color: rgba(180,83,9,0.15); background: rgba(255,255,255,0.9); }
-        body.light-mode .ribbon-badge::before { background: linear-gradient(135deg, #b45309, #f59e0b); }
-        body.light-mode .badge-container:hover .badge-label { color: #b45309; }
+        body.light-mode .ribbon-badge { color: #5b21b6; border-color: rgba(109,40,217,0.15); background: rgba(255,255,255,0.9); }
+        body.light-mode .ribbon-badge::before { background: linear-gradient(135deg, #6d28d9, #a855f7); }
+        body.light-mode .badge-container:hover .badge-label { color: #7c3aed; }
 
         .badge-label {
             font-size: 0.72rem;
@@ -1174,13 +1174,13 @@
             box-shadow: 0 6px 18px rgba(124,58,237,0.35);
         }
         body.light-mode .tech-item {
-            background: rgba(180,83,9,0.06);
-            color: #92400e;
-            border-color: rgba(180,83,9,0.15);
+            background: rgba(109,40,217,0.07);
+            color: #5b21b6;
+            border-color: rgba(109,40,217,0.16);
         }
         body.light-mode .tech-item:hover {
-            background: linear-gradient(135deg, #b45309, #f59e0b);
-            box-shadow: 0 6px 18px rgba(180,83,9,0.3);
+            background: linear-gradient(135deg, #6d28d9, #a855f7);
+            box-shadow: 0 6px 18px rgba(109,40,217,0.35);
         }
 
         /* ============================================================
@@ -1376,6 +1376,202 @@
             .hero h1 { letter-spacing: -1px; }
             .contact-pane { padding: 3rem 1.5rem; }
             .contact-pane h2 { font-size: 2rem; }
+        }
+
+        /* ============================================================
+           LIGHT MODE — ADDITIONAL PURPLE ENHANCEMENTS
+        ============================================================ */
+
+        /* Nav logo gradient to deep violet + fuchsia */
+        body.light-mode .nav-logo {
+            background: linear-gradient(135deg, #4a1d96 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Theme toggle button */
+        body.light-mode .theme-toggle-btn {
+            background: rgba(109,40,217,0.08);
+            border-color: rgba(109,40,217,0.2);
+            color: #6d28d9;
+        }
+        body.light-mode .theme-toggle-btn:hover {
+            background: rgba(109,40,217,0.15);
+            color: #a855f7;
+        }
+
+        /* Hero chips — frosted violet glass */
+        body.light-mode .hero-chip {
+            background: rgba(255,255,255,0.82);
+            border-color: rgba(109,40,217,0.25);
+            box-shadow: 0 8px 24px rgba(109,40,217,0.15);
+        }
+        body.light-mode .chip-text strong { color: #2e1065; }
+        body.light-mode .chip-text span   { color: #7c3aed; }
+
+        /* Ghost button */
+        body.light-mode .btn-ghost {
+            border-color: rgba(109,40,217,0.25);
+            color: #5b21b6;
+        }
+        body.light-mode .btn-ghost:hover {
+            border-color: rgba(168,85,247,0.5);
+            color: #4a1d96;
+            background: rgba(109,40,217,0.07);
+        }
+
+        /* Scroll indicator */
+        body.light-mode .scroll-indicator span { color: rgba(91,33,182,0.5); }
+        body.light-mode .scroll-line { background: linear-gradient(to bottom, #7c3aed, transparent); }
+
+        /* About section */
+        body.light-mode .about-content-column p { color: #4c1d95; }
+        body.light-mode .about-highlight-block { background: rgba(255,255,255,0.75); border-color: rgba(109,40,217,0.13); }
+        body.light-mode .about-highlight-block:hover { background: rgba(255,255,255,0.97); border-color: rgba(168,85,247,0.35); box-shadow: 0 8px 32px rgba(109,40,217,0.14); }
+
+        /* Service cards */
+        body.light-mode .service-column-card { background: rgba(255,255,255,0.8); border-color: rgba(109,40,217,0.1); box-shadow: 0 4px 24px rgba(109,40,217,0.06); }
+        body.light-mode .service-column-card h3 { color: #2e1065; }
+        body.light-mode .service-task-item { color: #5b21b6; }
+        body.light-mode .service-column-card:hover .service-task-item { color: #2e1065; }
+        body.light-mode .service-column-card:hover .service-task-item i { color: #d946ef; }
+        body.light-mode .service-column-header { border-bottom-color: rgba(109,40,217,0.1); }
+
+        /* Tech showcase card */
+        body.light-mode .tech-showcase { background: rgba(255,255,255,0.82); border-color: rgba(109,40,217,0.12); box-shadow: 0 8px 40px rgba(109,40,217,0.09); }
+        body.light-mode .tech-showcase h3 { color: #2e1065; }
+
+        /* Footer */
+        body.light-mode footer { color: rgba(109,40,217,0.55); border-top-color: rgba(109,40,217,0.15); }
+
+        /* Hero heading */
+        body.light-mode .hero h1 { color: #1e0050; }
+        body.light-mode .hero p  { color: rgba(60,20,130,0.72); }
+
+        /* Shimmering purple hero background orbs */
+        body.light-mode .hero {
+            background: linear-gradient(135deg, #faf7ff 0%, #f0ebff 45%, #ede4ff 100%);
+        }
+
+        /* Animated shimmer on cards in light mode */
+        body.light-mode .service-column-card::after {
+            background: radial-gradient(circle at 50% 0%, rgba(109,40,217,0.12) 0%, transparent 60%);
+        }
+
+        /* About image frame corner accents */
+        body.light-mode .about-image-frame::before { border-color: #7c3aed; }
+        body.light-mode .about-image-frame::after  { border-color: #d946ef; }
+
+        /* Scrollbar */
+        body.light-mode ::-webkit-scrollbar-thumb { background: #7c3aed; }
+        body.light-mode ::-webkit-scrollbar-track  { background: #f0ebff; }
+
+        /* ============================================================
+           EXTRA ANIMATIONS — added for both modes
+        ============================================================ */
+
+        /* Floating sparkles scattered on hero in light mode */
+        body.light-mode .hero-image-pane::before {
+            content: '';
+            position: absolute;
+            width: 8px; height: 8px;
+            background: #d946ef;
+            border-radius: 50%;
+            top: 18%; right: 14%;
+            box-shadow: 0 0 10px #d946ef, 0 0 20px #d946ef;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        body.light-mode .hero-image-pane::after {
+            content: '';
+            position: absolute;
+            width: 6px; height: 6px;
+            background: #a855f7;
+            border-radius: 50%;
+            bottom: 20%; left: 12%;
+            box-shadow: 0 0 8px #a855f7, 0 0 16px #a855f7;
+            animation: twinkle 4s ease-in-out 1s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.3; transform: scale(0.6); }
+        }
+
+        /* Shimmer sweep on hero heading text */
+        body.light-mode .hero h1 {
+            background: linear-gradient(
+                135deg,
+                #1e0050 0%,
+                #4a1d96 35%,
+                #7c3aed 50%,
+                #4a1d96 65%,
+                #1e0050 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 5s linear infinite;
+        }
+
+        @keyframes textShimmer {
+            0%   { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Pulsing glow on hero avatar in light mode */
+        body.light-mode .hero-avatar {
+            box-shadow: 0 20px 60px rgba(109,40,217,0.25), 0 0 0 3px rgba(168,85,247,0.15);
+            border-color: rgba(168,85,247,0.25);
+            animation: heroFloat 7s ease-in-out infinite alternate, avatarGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes avatarGlow {
+            from { box-shadow: 0 20px 60px rgba(109,40,217,0.2), 0 0 0 3px rgba(168,85,247,0.1); }
+            to   { box-shadow: 0 30px 80px rgba(109,40,217,0.4), 0 0 0 6px rgba(168,85,247,0.3); }
+        }
+
+        /* Staggered card entrance animation */
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(32px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        body.light-mode .service-column-card.reveal.active {
+            animation: cardEntrance 0.7s var(--ease) both;
+        }
+
+        /* Ripple glow on section labels */
+        body.light-mode .section-label {
+            position: relative;
+        }
+        body.light-mode .section-label::after {
+            content: '';
+            position: absolute;
+            inset: -4px -12px;
+            border-radius: 99px;
+            background: rgba(109,40,217,0.07);
+            z-index: -1;
+            animation: labelPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes labelPulse {
+            0%, 100% { opacity: 0; }
+            50%       { opacity: 1; }
+        }
+
+        /* Gradient border shimmer on ribbon badges */
+        body.light-mode .ribbon-badge {
+            box-shadow: 0 4px 16px rgba(109,40,217,0.1), inset 0 0 0 1px rgba(109,40,217,0.12);
+        }
+
+        /* Floating particles overlay for light mode hero */
+        @keyframes floatParticle {
+            0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+            33%  { transform: translateY(-18px) translateX(8px) scale(1.1); opacity: 1; }
+            66%  { transform: translateY(-6px) translateX(-6px) scale(0.95); opacity: 0.8; }
+            100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
         }
     </style>
 </head>
@@ -1660,7 +1856,7 @@
                 this.opacity = Math.random() * 0.6 + 0.1;
                 const isLight = document.body.classList.contains('light-mode');
                 this.hue = isLight
-                    ? (Math.random() < 0.5 ? 35 : 20)   // amber / warm orange
+                    ? (Math.random() < 0.5 ? 270 : 310)   // violet or fuchsia
                     : (Math.random() < 0.5 ? 270 : 300); // violet or pink
                 this.life = 0;
                 this.maxLife = Math.random() * 300 + 200;
@@ -1686,7 +1882,7 @@
         /* Nebula blobs */
         function getBlobHue(baseH) {
             return document.body.classList.contains('light-mode')
-                ? baseH - 235   // shift 270→35, 290→55, 260→25
+                ? baseH          // keep violet hues, just reduce opacity
                 : baseH;
         }
         const blobs = [
@@ -1771,8 +1967,12 @@
         function applyTheme(isLight) {
             document.body.classList.toggle('light-mode', isLight);
             icon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-            // aurora blobs: brighter in dark, softer in light
-            blobOpacityScale = isLight ? 0.45 : 1;
+            // blobs: slightly softer in light mode but still vibrant (purple on lavender bg)
+            blobOpacityScale = isLight ? 0.55 : 1;
+            // re-tint canvas overlay
+            document.querySelector('.canvas-tint').style.background = isLight
+                ? 'rgba(245,240,255,0.5)'
+                : 'transparent';
         }
 
         // Default = dark; load saved preference
