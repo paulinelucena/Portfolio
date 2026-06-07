@@ -382,18 +382,94 @@ footer {
   .services-grid { grid-template-columns:1fr; }
   .contact-grid { grid-template-columns:1fr; gap:3rem; }
 }
+
+/* ── HAMBURGER (mobile) ── */
+.nav-burger {
+  display:none;
+  background:transparent; border:1px solid var(--border-bright);
+  color:var(--cyan); width:42px; height:42px; border-radius:4px;
+  cursor:pointer; align-items:center; justify-content:center;
+  font-size:1.1rem; transition:all 0.3s;
+}
+.nav-burger:hover { background:var(--cyan); color:var(--bg-void); }
+
+.mobile-menu {
+  position:fixed; top:0; right:0; bottom:0;
+  width:78%; max-width:320px;
+  background:rgba(2,4,9,0.98);
+  backdrop-filter:blur(20px);
+  border-left:1px solid var(--border-bright);
+  z-index:1001;
+  transform:translateX(100%);
+  transition:transform 0.4s var(--ease-out);
+  display:flex; flex-direction:column;
+  padding:5rem 2rem 2rem;
+}
+.mobile-menu.open { transform:translateX(0); }
+.mobile-menu a {
+  display:block;
+  padding:1rem 0;
+  font-size:0.8rem; letter-spacing:3px; text-transform:uppercase;
+  color:var(--text-secondary);
+  border-bottom:1px solid var(--border);
+  transition:color 0.3s, padding-left 0.3s;
+}
+.mobile-menu a:hover { color:var(--cyan); padding-left:0.5rem; }
+.mobile-menu .nav-cta {
+  margin-top:1.5rem; border:1px solid var(--border-bright);
+  padding:0.9rem 1.2rem; text-align:center; color:var(--cyan);
+  border-radius:4px;
+}
+.mobile-menu-close {
+  position:absolute; top:1rem; right:1rem;
+  background:transparent; border:none; color:var(--cyan);
+  font-size:1.4rem; cursor:pointer; width:42px; height:42px;
+}
+.mobile-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.6);
+  z-index:1000; opacity:0; pointer-events:none;
+  transition:opacity 0.3s;
+}
+.mobile-overlay.open { opacity:1; pointer-events:auto; }
+
 @media(max-width:768px){
-  nav { padding:1rem 1.5rem; }
+  nav { padding:0.9rem 1.25rem; }
   .nav-links { display:none; }
-  .s-pad { padding:5rem 0; }
-  .hero-headline { font-size:2.6rem; }
-  .about-stats { grid-template-columns:repeat(3,1fr); }
-  .tools-grid { grid-template-columns:repeat(3,1fr); }
-  footer { flex-direction:column; gap:0.8rem; text-align:center; }
+  .nav-burger { display:inline-flex; }
+  .inner { padding:0 1.25rem; }
+  .s-pad { padding:4rem 0; }
+  .s-sub { margin-bottom:2.5rem; }
+  .hero { min-height:calc(100vh - 60px); }
+  .hero-content { padding:1.5rem 1.25rem; }
+  .hero-headline { font-size:2.4rem; margin-bottom:1.2rem; letter-spacing:-1px; }
+  .hero-tag { margin-bottom:1.8rem; font-size:0.6rem; padding:0.4rem 1rem; }
+  .hero-sub { font-size:0.85rem; line-height:1.7; }
+  .hero-type-wrap { margin-bottom:2rem; font-size:0.78rem; }
+  .hero-cta-row { gap:0.8rem; }
+  .btn-primary, .btn-ghost { padding:0.8rem 1.5rem; font-size:0.7rem; }
+  .s-title { margin-bottom:0.6rem; }
+  .svc-card { padding:1.6rem 1.4rem; }
+  .about-stats { grid-template-columns:repeat(3,1fr); gap:0.6rem; }
+  .stat-box { padding:1rem 0.6rem; }
+  .stat-val { font-size:1.5rem; }
+  .tools-grid { grid-template-columns:repeat(3,1fr); gap:0.7rem; }
+  .contact-grid { gap:2.5rem; }
+  .contact-link { padding:0.95rem 1.1rem; }
+  footer { flex-direction:column; gap:0.8rem; text-align:center; padding:1.8rem 1.25rem; }
 }
 @media(max-width:480px){
+  nav { padding:0.8rem 1rem; }
+  .inner { padding:0 1rem; }
+  .s-pad { padding:3.5rem 0; }
+  .hero-content { padding:1.25rem 1rem; }
+  .hero-headline { font-size:2rem; }
+  .hero-sub { font-size:0.8rem; }
+  .hero-cta-row { flex-direction:column; width:100%; }
+  .hero-cta-row a { width:100%; text-align:center; }
   .about-stats { grid-template-columns:1fr 1fr; }
   .tools-grid { grid-template-columns:repeat(2,1fr); }
+  .svc-card { padding:1.4rem 1.2rem; }
+  footer { padding:1.5rem 1rem; }
 }
 </style>
 </head>
@@ -414,7 +490,39 @@ footer {
     <li><a href="Certificates.html" target="_blank">Certificates</a></li>
     <li><a href="#contact" class="nav-cta">Connect →</a></li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Open menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <a href="#about" data-close>About</a>
+  <a href="#services" data-close>Services</a>
+  <a href="#workflow" data-close>Workflow</a>
+  <a href="#tools" data-close>Tools</a>
+  <a href="Certificates.html" target="_blank" data-close>Certificates</a>
+  <a href="#contact" class="nav-cta" data-close>Connect →</a>
+</aside>
+
+<script>
+(function(){
+  var burger = document.getElementById('navBurger');
+  var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('mobileOverlay');
+  var closeBtn = document.getElementById('mobileClose');
+  function open(){ menu.classList.add('open'); overlay.classList.add('open'); menu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function close(){ menu.classList.remove('open'); overlay.classList.remove('open'); menu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  burger && burger.addEventListener('click', open);
+  closeBtn && closeBtn.addEventListener('click', close);
+  overlay && overlay.addEventListener('click', close);
+  menu && menu.querySelectorAll('[data-close]').forEach(function(a){ a.addEventListener('click', close); });
+})();
+</script>
 
 <!-- HERO -->
 <section class="hero">
