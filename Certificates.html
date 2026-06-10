@@ -81,6 +81,25 @@ nav {
 
 /* ── GRID ── */
 .cert-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:1.5rem; }
+.cert-section { margin-bottom: 3rem; }
+.cert-section-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 0 0 1.5rem 0;
+}
+.cert-section-header .sh-bar { flex: 0 0 40px; height: 1px; background: var(--cyan); opacity: 0.6; }
+.cert-section-header .sh-line { flex: 1; height: 1px; background: var(--border); }
+.cert-section-header .sh-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--text-primary); letter-spacing: 1px;
+}
+.cert-section-header .sh-count {
+  font-family: var(--font-mono);
+  font-size: 0.65rem; letter-spacing: 2px;
+  color: var(--cyan); text-transform: uppercase;
+  border: 1px solid var(--border-bright);
+  padding: 0.3rem 0.7rem; border-radius: 2px;
+}
 .cert-card {
   background:var(--bg-card); border:1px solid var(--border); border-radius:4px;
   overflow:hidden; cursor:pointer; position:relative; transition:0.4s var(--ease-out);
@@ -226,8 +245,7 @@ nav {
     <h1 class="page-title">Certificates &<br><span>Achievements.</span></h1>
   </div>
 
-  <div class="cert-grid" id="certGrid">
-    </div>
+  <div id="certSections"></div>
 </div>
 
 <div class="lightbox" id="lightbox">
@@ -377,32 +395,84 @@ const certificates = [
     date: 'December 4, 2022',
     skills: ['Financial Analyst\'s POV Webinar'],
     signatories: ['BERNADETTE HOLANDA [Guest Speaker]', 'Zenith Camu, CPA, DPA, PhD (Adviser)']
+  },
+  {
+    src: 'QuickBooksOnlineCertification.jpg',
+    title: 'QuickBooks Online Accountant Certification',
+    type: 'Professional ProAdvisor Certification',
+    issuer: 'Intuit QuickBooks',
+    date: 'June 10, 2026',
+    skills: ['QuickBooks Online Accountant Setup & Navigation', 'Client Management & Books Review', 'Banking, Reconciliation & Transactions', 'Reporting & Financial Statement Preparation', 'Payroll, Sales Tax & Advanced Features'],
+    signatories: ['Amanda Newton [GTM Segment Lead, Accountant Channel – Rest of World Portfolio]', 'Intuit QuickBooks']
   }
 ];
 
-const grid = document.getElementById('certGrid');
+// Category assignment by index:
+//   0-5  → TESDA Modules I-VI
+//   6    → DICT Webinar (CLEP)
+//   7-8  → College Webinars
+//   9    → Intuit QuickBooks ProAdvisor
+const categoryFor = (idx) => {
+  if (idx <= 5) return 'tesda';
+  if (idx === 6) return 'dict';
+  if (idx === 9) return 'proadvisor';
+  return 'college';
+};
+const categoryLabels = {
+  proadvisor: { sub: 'INTUIT PROADVISOR', title: 'Professional ProAdvisor Certification', order: 1 },
+  tesda:      { sub: 'TESDA CERTIFIED',   title: 'TESDA Certificate of Completion',                  order: 2 },
+  dict:       { sub: 'DICT WEBINAR',      title: 'DICT Webinar',                          order: 3 },
+  college:    { sub: 'COLLEGE WEBINAR',   title: 'College Webinars',                      order: 4 },
+};
+
+const sectionsRoot = document.getElementById('certSections');
 let current = 0;
 
-// Init Grid
+// Group certificates by category while preserving original indices
+const groups = {};
 certificates.forEach((cert, idx) => {
-  const card = document.createElement('div');
-  card.className = 'cert-card';
-  card.onclick = () => openLightbox(idx);
-  card.innerHTML = `
-    <div class="img-wrap">
-      <img src="${cert.src}" alt="${cert.title}" loading="lazy">
-      <div class="card-tag">REF-${(idx+1).toString().padStart(2, '0')}</div>
-    </div>
-    <div class="card-footer">
-      <div>
-        <div class="cert-name">${cert.title}</div>
-        <div class="cert-sub">${idx < 6 ? 'TESDA CERTIFIED' : 'COLLEGE WEBINAR'}</div>
-      </div>
-      <div style="color:var(--cyan); font-size:0.8rem;"><i class="fas fa-plus"></i></div>
-    </div>
-  `;
-  grid.appendChild(card);
+  const cat = categoryFor(idx);
+  (groups[cat] = groups[cat] || []).push({ cert, idx });
 });
+
+// Render sections in defined order
+Object.keys(groups)
+  .sort((a, b) => categoryLabels[a].order - categoryLabels[b].order)
+  .forEach((cat) => {
+    const items = groups[cat];
+    const section = document.createElement('section');
+    section.className = 'cert-section';
+    section.innerHTML = `
+      <div class="cert-section-header">
+        <span class="sh-bar"></span>
+        <span class="sh-title">${categoryLabels[cat].title}</span>
+        <span class="sh-count">${items.length.toString().padStart(2,'0')} ${items.length === 1 ? 'Credential' : 'Credentials'}</span>
+        <span class="sh-line"></span>
+      </div>
+      <div class="cert-grid"></div>
+    `;
+    const grid = section.querySelector('.cert-grid');
+    items.forEach(({ cert, idx }) => {
+      const card = document.createElement('div');
+      card.className = 'cert-card';
+      card.onclick = () => openLightbox(idx);
+      card.innerHTML = `
+        <div class="img-wrap">
+          <img src="${cert.src}" alt="${cert.title}" loading="lazy">
+          <div class="card-tag">REF-${(idx+1).toString().padStart(2, '0')}</div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="cert-name">${cert.title}</div>
+            <div class="cert-sub">${categoryLabels[cat].sub}</div>
+          </div>
+          <div style="color:var(--cyan); font-size:0.8rem;"><i class="fas fa-plus"></i></div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    sectionsRoot.appendChild(section);
+  });
 
 function openLightbox(index) {
   current = index;
