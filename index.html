@@ -427,10 +427,8 @@ section, [id], .full-w { }
   transition:border-color 0.3s, box-shadow 0.3s;
 }
 .testimonial:hover { border-color:var(--border-bright); box-shadow:0 0 24px var(--cyan-glow); }
-.testimonial::before {
-  content:'C'; position:absolute; top:-14px; left:14px;
-  font-family:var(--font-display); font-size:4rem; color:var(--cyan); line-height:1;
-}
+.testimonial::before { content:none; }
+
 .testimonial blockquote { color:var(--text-primary); font-size:1rem; line-height:1.7; margin-bottom:1rem; font-style:italic; }
 .testimonial figcaption { font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); font-family:var(--font-mono); }
 
