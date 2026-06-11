@@ -218,11 +218,28 @@ nav {
 .nav-counter { font-size: 0.75rem; color: var(--text-muted); min-width: 60px; text-align: center; }
 
 @media(max-width: 950px) {
-  .lb-content-split { flex-direction: column; }
-  .lb-view-side { padding: 30px; min-height: 300px; }
-  .lb-info-side { padding: 30px; }
-  .lb-container { height: 95vh; overflow-y: auto; }
+  .lightbox {
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 15px 0;
+  }
+  .lb-backdrop { position: fixed; }
+  .lb-content-split { flex-direction: column; min-height: 0; }
+  .lb-view-side { padding: 50px 20px 25px; min-height: auto; }
+  .lb-info-side { padding: 25px 20px; border-left: none; border-top: 1px solid rgba(255,255,255,0.05); }
+  .lb-container {
+    width: 94%;
+    margin: 0 auto;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+  .lb-img { max-height: none; width: 100%; height: auto; }
+  .lb-title { font-size: 1.4rem; }
   .lb-nav-bar { flex-direction: column; gap: 15px; padding: 20px; text-align: center; }
+  .lb-close { top: 12px; right: 12px; }
 }
 </style>
 </head>
