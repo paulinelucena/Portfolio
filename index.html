@@ -542,6 +542,64 @@ section, [id], .full-w { }
   .svc-card { padding:1.4rem 1.2rem; }
   footer { padding:1.5rem 1.5rem; }
 }
+
+/* ── MOBILE EDGE PADDING FIX (≤768px) ──
+   Ensures consistent 20–24px breathing room on small screens
+   without affecting desktop layout. */
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  /* Universal content gutter for every section wrapper */
+  .inner,
+  #workflow .wf-inner,
+  #workflow {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+
+  /* Section wrappers that hold inline-styled backgrounds */
+  #about, #services, #workflow, #tools, #contact, #proof {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Cards / text containers shouldn't kiss the gutter either */
+  .about-bio,
+  .about-bio p,
+  .about-quote,
+  .s-sub,
+  .s-title,
+  .s-label {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+
+  /* Hero & nav alignment with the same gutter */
+  nav { padding-left: 22px !important; padding-right: 22px !important; }
+  .hero-content { padding-left: 22px !important; padding-right: 22px !important; }
+  footer { padding-left: 22px !important; padding-right: 22px !important; }
+
+  /* Prevent overflow from long words / inline code */
+  p, h1, h2, h3, h4, blockquote, li {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  img, video, iframe { max-width: 100%; height: auto; }
+}
+
+@media (max-width: 480px) {
+  .inner,
+  #workflow .wf-inner,
+  #workflow,
+  nav,
+  .hero-content,
+  footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
 </style>
 </head>
 <body>
