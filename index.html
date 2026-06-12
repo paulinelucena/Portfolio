@@ -597,6 +597,53 @@ section, [id], .full-w { }
 @media (max-width: 480px) {
   :root { --mobile-gutter: 20px; }
 }
+
+/* ── DESKTOP-SITE-ON-MOBILE FIX ──
+   When a phone requests the "Desktop site" the viewport reports
+   ~980–1200px so the 768px media query never fires, and content
+   slams against the screen edge. Detect touch/coarse pointers
+   (true mobile hardware) and apply the same gutter regardless
+   of reported width. Real desktops have fine pointers + hover,
+   so this never triggers there. */
+@media (hover: none) and (pointer: coarse) {
+  :root { --mobile-gutter: 22px; }
+
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  #about > .inner,
+  #services > .inner,
+  #tools > .inner,
+  #proof > .inner,
+  #contact > .inner,
+  #workflow .wf-inner,
+  .hero .inner,
+  .hero-content,
+  .inner {
+    padding-left: var(--mobile-gutter) !important;
+    padding-right: var(--mobile-gutter) !important;
+    max-width: 100%;
+  }
+
+  #workflow,
+  nav,
+  footer {
+    padding-left: var(--mobile-gutter) !important;
+    padding-right: var(--mobile-gutter) !important;
+  }
+
+  .s-title, .s-sub, .s-label,
+  .about-bio, .about-bio p, .about-quote,
+  .wf-title, .wf-sub, .hero-headline, .hero-sub {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, h4, h5, blockquote, li, a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  img, video, iframe, svg { max-width: 100%; height: auto; }
+}
 </style>
 </head>
 <body>
