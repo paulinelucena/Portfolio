@@ -716,7 +716,7 @@ section, [id], .full-w { }
           <div class="stat-lbl">% Reconciliation Accuracy</div>
         </div>
         <div class="stat-box">
-          <div class="stat-val" data-target="24">8+</div>
+          <div class="stat-val" data-target="8">8+</div>
           <div class="stat-lbl">Tools Used</div>
         </div>
       </div>
@@ -981,6 +981,15 @@ section, [id], .full-w { }
         <button type="submit" class="form-submit" id="form-btn">Send Inquiry →</button>
         <p class="form-submit-note">Reply within 1 business day · No pitch, just a plan.</p>
         <p id="form-status" style="margin-top:0.8rem;font-size:0.78rem;display:none;"></p>
+
+        <div style="display:flex;align-items:center;gap:0.8rem;margin:1.4rem 0 1rem;color:var(--text-muted);font-family:var(--font-mono);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;">
+          <span style="flex:1;height:1px;background:var(--border-bright);"></span>
+          <span>Or</span>
+          <span style="flex:1;height:1px;background:var(--border-bright);"></span>
+        </div>
+        <a href="https://calendly.com/paulinelucena27/30min" target="_blank" rel="noopener noreferrer" class="wf-cta" style="display:inline-flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;">
+          Book Free Discovery Call <i class="fa-regular fa-clock"></i>
+        </a>
       </form>
     </div>
   </div>
@@ -1088,6 +1097,36 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── STAT COUNT-UP ──
+const animateCount = el => {
+  const target = parseFloat(el.dataset.target) || 0;
+  const raw = el.textContent.trim();
+  const suffix = raw.replace(/[\d.,\s]/g, '') || '';
+  // Longer duration for small targets so each tick is visible
+  const duration = Math.max(1400, target < 10 ? 2200 : 1800);
+  const start = performance.now();
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  el.style.transition = 'transform 0.25s var(--ease-out)';
+  const tick = now => {
+    const p = Math.min((now - start) / duration, 1);
+    const val = Math.round(target * ease(p));
+    el.textContent = val + suffix;
+    el.style.transform = p < 1 ? 'scale(1.04)' : 'scale(1)';
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  el.textContent = '0' + suffix;
+  requestAnimationFrame(tick);
+};
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCount(entry.target);
+      statObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-val[data-target]').forEach(el => statObserver.observe(el));
 
 // ── TYPEWRITER ──
 const typewriter = [
