@@ -535,7 +535,10 @@ section, [id], .full-w { }
   .hero-sub { font-size:0.8rem; }
   .hero-cta-row { flex-direction:column; width:100%; }
   .hero-cta-row a { width:100%; text-align:center; }
-  .about-stats { grid-template-columns:1fr 1fr; }
+  .about-stats { grid-template-columns:repeat(3,1fr); gap:0.5rem; }
+  .stat-box { padding:0.9rem 0.4rem; }
+  .stat-val { font-size:1.25rem; }
+  .stat-lbl { font-size:0.6rem; letter-spacing:1px; }
   .tools-grid { grid-template-columns:repeat(2,1fr); }
   .svc-card { padding:1.4rem 1.2rem; }
   footer { padding:1.5rem 1.5rem; }
@@ -866,7 +869,7 @@ section, [id], .full-w { }
 #workflow .wf-cta i { transition: transform 0.3s var(--ease-out); }
 #workflow .wf-cta:hover i { transform: translateX(4px); }
 @media (max-width: 1100px) { #workflow .wf-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 760px) { #workflow .wf-grid { grid-template-columns: 1fr; } #workflow { padding: 5rem 2rem; } }
+@media (max-width: 760px) { #workflow .wf-grid { grid-template-columns: repeat(5, 1fr); gap: 0.5rem; } #workflow { padding: 5rem 2rem; } #workflow .wf-card { padding: 0.8rem 0.6rem; } #workflow .wf-step { font-size: 0.55rem; margin-bottom: 0.5rem; letter-spacing: 0.15em; } #workflow .wf-card h3 { font-size: 0.75rem; margin-bottom: 0.45rem; } #workflow .wf-card p { font-size: 0.65rem; line-height: 1.45; } }
 </style>
 <section id="workflow">
   <div class="wf-inner">
