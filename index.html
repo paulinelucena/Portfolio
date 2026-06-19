@@ -878,14 +878,20 @@ section, [id], .full-w { }
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 0.25rem 1rem 1rem;
+    padding: 2rem 1rem 2rem;
     margin: 0 -1rem 2rem;
     scrollbar-width: thin;
+    perspective: 900px;
+    perspective-origin: 50% 50%;
   }
   #workflow .wf-card {
     flex: 0 0 78%;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     padding: 1.25rem 1.1rem;
+    transform-origin: center center;
+    transform-style: preserve-3d;
+    transition: transform 0.25s var(--ease-out), opacity 0.25s var(--ease-out);
+    will-change: transform, opacity;
   }
   #workflow .wf-card h3 { font-size: 1rem; }
   #workflow .wf-card p { font-size: 0.8rem; }
@@ -1258,6 +1264,41 @@ if (contactForm) {
 const style = document.createElement('style');
 style.textContent = '@keyframes portraitRing { 0%{transform:scale(1);} 50%{transform:scale(1.08);} 100%{transform:scale(1);} }';
 document.head.appendChild(style);
+
+// ── CYLINDRICAL WORKFLOW CAROUSEL (mobile) ──
+(function(){
+  const grid = document.querySelector('#workflow .wf-grid');
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll('.wf-card'));
+  const mq = window.matchMedia('(max-width: 760px)');
+  let raf = null;
+
+  function update() {
+    raf = null;
+    if (!mq.matches) { cards.forEach(c => c.style.transform = ''); return; }
+    const gRect = grid.getBoundingClientRect();
+    const centerX = gRect.left + gRect.width / 2;
+    const maxDist = gRect.width / 2 + 100;
+    cards.forEach(card => {
+      const r = card.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const dx = cx - centerX;
+      const ratio = Math.max(-1.2, Math.min(1.2, dx / maxDist));
+      const rotY = ratio * -55;          // cylindrical tilt
+      const tz = -Math.abs(ratio) * 120;  // push side cards back
+      const scale = 1 - Math.abs(ratio) * 0.12;
+      const opacity = 1 - Math.abs(ratio) * 0.45;
+      card.style.transform = `translateZ(${tz}px) rotateY(${rotY}deg) scale(${scale})`;
+      card.style.opacity = opacity;
+    });
+  }
+  function onScroll(){ if (raf == null) raf = requestAnimationFrame(update); }
+  grid.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  mq.addEventListener?.('change', onScroll);
+  // initial
+  requestAnimationFrame(update);
+})();
 </script>
 
 </body>
