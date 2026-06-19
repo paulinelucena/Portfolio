@@ -869,7 +869,27 @@ section, [id], .full-w { }
 #workflow .wf-cta i { transition: transform 0.3s var(--ease-out); }
 #workflow .wf-cta:hover i { transform: translateX(4px); }
 @media (max-width: 1100px) { #workflow .wf-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 760px) { #workflow .wf-grid { grid-template-columns: repeat(5, 1fr); gap: 0.5rem; } #workflow { padding: 5rem 2rem; } #workflow .wf-card { padding: 0.8rem 0.6rem; } #workflow .wf-step { font-size: 0.55rem; margin-bottom: 0.5rem; letter-spacing: 0.15em; } #workflow .wf-card h3 { font-size: 0.75rem; margin-bottom: 0.45rem; } #workflow .wf-card p { font-size: 0.65rem; line-height: 1.45; } }
+@media (max-width: 760px) {
+  #workflow { padding: 5rem 1rem; }
+  #workflow .wf-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 1rem 1rem;
+    margin: 0 -1rem 2rem;
+    scrollbar-width: thin;
+  }
+  #workflow .wf-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    padding: 1.25rem 1.1rem;
+  }
+  #workflow .wf-card h3 { font-size: 1rem; }
+  #workflow .wf-card p { font-size: 0.8rem; }
+}
 </style>
 <section id="workflow">
   <div class="wf-inner">
