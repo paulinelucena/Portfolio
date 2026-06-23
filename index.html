@@ -522,6 +522,8 @@ section, [id], .full-w { }
   .hero-headline { letter-spacing:-0.5px; }
   .tools-grid { grid-template-columns:repeat(3,1fr); gap:0.7rem; }
   .contact-grid { gap:2.5rem; }
+  .pricing-grid { grid-template-columns:1fr; max-width:100%; }
+  .result-before-after { grid-template-columns:1fr; gap:0.8rem; }
   .contact-link { padding:0.95rem 1.1rem; }
   footer { flex-direction:column; gap:0.8rem; text-align:center; padding:1.8rem 2rem; }
 }
@@ -663,6 +665,7 @@ section, [id], .full-w { }
     <li><a href="#services">Services</a></li>
     <li><a href="#workflow">Workflow</a></li>
     <li><a href="#tools">Tools</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="Certificates.html" target="_blank">Certificates</a></li>
     <li><a href="#contact" class="nav-cta">Connect →</a></li>
   </ul>
@@ -681,6 +684,7 @@ section, [id], .full-w { }
   <a href="#services" data-close>Services</a>
   <a href="#workflow" data-close>Workflow</a>
   <a href="#tools" data-close>Tools</a>
+  <a href="#pricing" data-close>Pricing</a>
   <a href="Certificates.html" target="_blank" data-close>Certificates</a>
   <a href="#contact" class="nav-cta" data-close>Let's Chat!</a>
 </aside>
@@ -765,8 +769,8 @@ section, [id], .full-w { }
           <div class="stat-lbl">% Reconciliation Accuracy</div>
         </div>
         <div class="stat-box">
-          <div class="stat-val" data-target="8">8+</div>
-          <div class="stat-lbl">Tools Used</div>
+          <div class="stat-val" data-target="15">15+</div>
+          <div class="stat-lbl">Tools Mastered</div>
         </div>
       </div>
     </div>
@@ -954,44 +958,311 @@ section, [id], .full-w { }
     <div class="tool-chip"><span class="tool-chip-name">Outlook</span><span class="tool-chip-sub">Email</span></div>
     <div class="tool-chip"><span class="tool-chip-name">Gmail</span><span class="tool-chip-sub">Email</span></div>
     <div class="tool-chip"><span class="tool-chip-name">Slack</span><span class="tool-chip-sub">Collaboration</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Microsoft Team</span><span class="tool-chip-sub">Collaboration</span></div>
     <div class="tool-chip"><span class="tool-chip-name">MS Teams</span><span class="tool-chip-sub">Collaboration</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Docs / PPT</span><span class="tool-chip-sub">MS & Google</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Calendar / Calendly</span><span class="tool-chip-sub">Scheduling</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Gemini</span><span class="tool-chip-sub">AI Chat</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Chat GPT</span><span class="tool-chip-sub">AI Chat</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Claude</span><span class="tool-chip-sub">AI Chat</span></div>
+    <div class="tool-chip"><span class="tool-chip-name">Google Docs</span><span class="tool-chip-sub">Documents</span></div>
+    <div class="tool-chip"><span class="tool-chip-name">Calendly</span><span class="tool-chip-sub">Scheduling</span></div>
+    <div class="tool-chip"><span class="tool-chip-name">Notion</span><span class="tool-chip-sub">Task Mgmt</span></div>
+    <div class="tool-chip"><span class="tool-chip-name">ChatGPT</span><span class="tool-chip-sub">AI Assistant</span></div>
+    <div class="tool-chip"><span class="tool-chip-name">Claude AI</span><span class="tool-chip-sub">AI Assistant</span></div>
   </div>
 </div>
 </div>
 
-<!-- TESTIMONIALS -->
+<!-- RESULTS & PRICING -->
+<style>
+/* ── RESULT CARDS ── */
+.result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.result-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--teal));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.result-card:hover { border-color: var(--border-bright); box-shadow: 0 0 30px var(--cyan-glow); transform: translateY(-4px); }
+.result-card:hover::after { transform: scaleX(1); }
+
+.result-icon {
+  font-size: 1.4rem; color: var(--cyan); margin-bottom: 1.2rem;
+}
+.result-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 0.6rem;
+}
+.result-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 1.2rem;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+}
+.result-before-after {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.ba-col-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.ba-col-label.before { color: var(--text-muted); }
+.ba-col-label.after { color: var(--teal); }
+.ba-col-text {
+  font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;
+}
+.ba-col-text.after-text { color: var(--text-primary); }
+.ba-divider {
+  width: 1px; background: var(--border); align-self: stretch;
+  display: none; /* hidden — using grid gap instead */
+}
+
+/* ── PRICING ── */
+#pricing { background: var(--bg-void); }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 1rem;
+}
+.pricing-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 2.2rem;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: all 0.4s var(--ease-out);
+}
+.pricing-card.featured {
+  border-color: var(--border-bright);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 40px var(--cyan-glow);
+}
+.pricing-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--teal));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.pricing-card.featured::before { transform: scaleX(1); }
+.pricing-card:hover { border-color: var(--border-bright); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px var(--cyan-glow); }
+.pricing-card:hover::before { transform: scaleX(1); }
+
+.pricing-badge {
+  display: inline-block; font-family: var(--font-mono);
+  font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--bg-void); background: linear-gradient(90deg, var(--cyan), var(--teal));
+  padding: 0.25rem 0.8rem; border-radius: 2px;
+  position: absolute; top: 1.4rem; right: 1.4rem;
+}
+.pricing-tier {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--cyan); margin-bottom: 0.6rem;
+}
+.pricing-name {
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
+  color: var(--text-primary); margin-bottom: 0.4rem;
+}
+.pricing-tagline {
+  font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.4rem;
+  padding-bottom: 1.4rem; border-bottom: 1px solid var(--border); line-height: 1.6;
+}
+.pricing-from {
+  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;
+}
+.pricing-rate {
+  font-family: var(--font-display); font-size: 2.4rem; font-weight: 800;
+  color: var(--cyan); line-height: 1; margin-bottom: 0.3rem;
+}
+.pricing-unit {
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted);
+  letter-spacing: 1px; margin-bottom: 1.4rem;
+}
+.pricing-features {
+  list-style: none; display: flex; flex-direction: column; gap: 0.7rem;
+  margin-bottom: 2rem; flex: 1;
+}
+.pricing-features li {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;
+}
+.pricing-features li i { color: var(--teal); font-size: 0.7rem; margin-top: 0.35rem; flex-shrink: 0; }
+.pricing-cta {
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 2px;
+  text-transform: uppercase; font-weight: 700;
+  padding: 0.9rem 1.5rem; border-radius: 4px;
+  text-align: center; transition: all 0.3s; display: block;
+  border: 1px solid var(--border-bright); color: var(--cyan);
+  background: transparent;
+}
+.pricing-cta:hover { background: var(--cyan); color: var(--bg-void); box-shadow: 0 0 24px rgba(0,212,255,0.3); }
+.pricing-card.featured .pricing-cta {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--bg-void); border: none;
+}
+.pricing-card.featured .pricing-cta:hover { box-shadow: 0 0 30px rgba(0,212,255,0.5); transform: translateY(-1px); }
+.pricing-note {
+  text-align: center; font-family: var(--font-mono);
+  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 2.5rem;
+}
+.pricing-note a { color: var(--cyan); }
+
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .result-before-after { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .result-card { padding: 1.5rem; }
+}
+</style>
+
 <div id="proof" class="full-w s-border">
 <div class="inner s-pad">
-  <div class="s-label reveal">---</div>
-  <h2 class="s-title reveal">Results I'm built for.</h2>
-  <p class="s-sub reveal">"Your books caught up in weeks, not months" — no attribution needed, no fakery.</p>
+  <div class="s-label reveal">04 — Results</div>
+  <h2 class="s-title reveal">What Changes<br>When I'm Involved.</h2>
+  <p class="s-sub reveal">Real outcomes from the kind of work I do — shown as before-and-after snapshots, because the numbers tell the story better than any pitch.</p>
   <div class="testimonial-grid">
-    <figure class="testimonial reveal">
-      <blockquote><br>Before: 3 months of backlog, no clarity.<br>After: clean books, reports on time.</blockquote>
-      <figcaption>— </figcaption>
-    </figure>
-    <figure class="testimonial reveal d2">
-      <blockquote><br>Before: Business owner relied on guesswork for financial health.<br>After: Accurate dashboards and reports showing clear financial performance.</blockquote>
-      <figcaption>— </figcaption>
-    </figure>
-    <figure class="testimonial reveal d3">
-      <blockquote><br>Before: Expenses were mixed personal and business transactions. <br>After: Clean separation of personal and business expenses with proper categorization.</blockquote>
-      <figcaption>— </figcaption>
-    </figure>
+
+    <div class="result-card reveal d1">
+      <div class="result-icon"><i class="fa-solid fa-layer-group"></i></div>
+      <div class="result-label">Case · Backlog</div>
+      <div class="result-title">3-Month Catch-Up, Zero Guesswork</div>
+      <div class="result-before-after">
+        <div>
+          <div class="ba-col-label before">❌ Before</div>
+          <div class="ba-col-text">3 months of unreconciled entries, no clear financial picture, owner flying blind.</div>
+        </div>
+        <div>
+          <div class="ba-col-label after">✓ After</div>
+          <div class="ba-col-text after-text">Books fully caught up, reports delivered on time, owner back in control.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card reveal d2">
+      <div class="result-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="result-label">Case · Reporting</div>
+      <div class="result-title">From Guesswork to Clear Financial Visibility</div>
+      <div class="result-before-after">
+        <div>
+          <div class="ba-col-label before">❌ Before</div>
+          <div class="ba-col-text">Business owner relied on gut feel — no reports, no data to make confident decisions.</div>
+        </div>
+        <div>
+          <div class="ba-col-label after">✓ After</div>
+          <div class="ba-col-text after-text">Accurate dashboards and monthly reports showing real financial performance.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card reveal d3">
+      <div class="result-icon"><i class="fa-solid fa-code-branch"></i></div>
+      <div class="result-label">Case · Categorization</div>
+      <div class="result-title">Personal vs. Business — Finally Separated</div>
+      <div class="result-before-after">
+        <div>
+          <div class="ba-col-label before">❌ Before</div>
+          <div class="ba-col-text">Personal and business expenses mixed together — a compliance risk and bookkeeping nightmare.</div>
+        </div>
+        <div>
+          <div class="ba-col-label after">✓ After</div>
+          <div class="ba-col-text after-text">Clean, properly categorized transactions. Audit-ready and stress-free.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <div style="margin-top:3rem;padding:1.8rem 2rem;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;" class="reveal">
+    <div style="flex:1;min-width:220px;">
+      <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.5rem;">Note on Testimonials</div>
+      <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;margin:0;">I'm currently building my client roster. The outcomes above reflect the type of work I've handled professionally. Once I take on clients, real testimonials will live here. <strong style="color:var(--text-primary);">Reach out to be one of the first.</strong></p>
+    </div>
+    <a href="#contact" class="btn-primary" style="flex-shrink:0;white-space:nowrap;">Work With Me →</a>
+  </div>
+</div>
+</div>
+
+<!-- PRICING -->
+<div id="pricing" class="full-w s-border" style="background:var(--bg-surface);">
+<div class="inner s-pad">
+  <div class="s-label reveal">05 — Pricing</div>
+  <h2 class="s-title reveal">Simple, Transparent<br>Starting Points.</h2>
+  <p class="s-sub reveal">Every business is different — these tiers are a guide, not a ceiling. Book a free call and I'll quote exactly what your situation needs.</p>
+
+  <div class="pricing-grid">
+
+    <div class="pricing-card reveal d1">
+      <div class="pricing-tier">Starter</div>
+      <div class="pricing-name">Essentials</div>
+      <div class="pricing-tagline">For freelancers or small businesses that need clean books without the overhead.</div>
+      <div class="pricing-from">Starting from</div>
+      <div class="pricing-rate">$5<span style="font-size:1.2rem;">/hr</span></div>
+      <div class="pricing-unit">or from $150 / month · billed monthly</div>
+      <ul class="pricing-features">
+        <li><i class="fa-solid fa-check"></i>Bank reconciliation (up to 1 account)</li>
+        <li><i class="fa-solid fa-check"></i>Invoice creation & delivery</li>
+        <li><i class="fa-solid fa-check"></i>Basic expense categorization</li>
+        <li><i class="fa-solid fa-check"></i>Monthly summary report</li>
+        <li><i class="fa-solid fa-check"></i>Email support within 1 business day</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">Get a Quote →</a>
+    </div>
+
+    <div class="pricing-card featured reveal d2">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-tier">Growth</div>
+      <div class="pricing-name">Full Support</div>
+      <div class="pricing-tagline">For growing businesses that need a reliable ongoing finance & admin partner.</div>
+      <div class="pricing-from">Starting from</div>
+      <div class="pricing-rate">$7<span style="font-size:1.2rem;">/hr</span></div>
+      <div class="pricing-unit">or from $350 / month · billed monthly</div>
+      <ul class="pricing-features">
+        <li><i class="fa-solid fa-check"></i>Everything in Essentials</li>
+        <li><i class="fa-solid fa-check"></i>Multi-account reconciliation</li>
+        <li><i class="fa-solid fa-check"></i>AR/AP tracking & follow-ups</li>
+        <li><i class="fa-solid fa-check"></i>P&L and cash flow reports</li>
+        <li><i class="fa-solid fa-check"></i>Calendar & email management</li>
+        <li><i class="fa-solid fa-check"></i>Weekly check-in call (30 min)</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">Get a Quote →</a>
+    </div>
+
+    <div class="pricing-card reveal d3">
+      <div class="pricing-tier">Custom</div>
+      <div class="pricing-name">Done-For-You</div>
+      <div class="pricing-tagline">For businesses with complex needs — catch-up projects, NetSuite, or full VA scope.</div>
+      <div class="pricing-from">Priced per scope</div>
+      <div class="pricing-rate" style="font-size:1.6rem;line-height:1.2;margin-bottom:0.5rem;">Let's talk</div>
+      <div class="pricing-unit">one-time or retainer · fully customized</div>
+      <ul class="pricing-features">
+        <li><i class="fa-solid fa-check"></i>Everything in Full Support</li>
+        <li><i class="fa-solid fa-check"></i>Backlog catch-up & clean-up</li>
+        <li><i class="fa-solid fa-check"></i>NetSuite / Floqast workflows</li>
+        <li><i class="fa-solid fa-check"></i>SOP documentation</li>
+        <li><i class="fa-solid fa-check"></i>Custom reporting & dashboards</li>
+        <li><i class="fa-solid fa-check"></i>Priority turnaround</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">Get a Quote →</a>
+    </div>
+
+  </div>
+  <p class="pricing-note reveal">All prices are starting points and vary by scope, tools, and transaction volume. <a href="#contact">Book a free call</a> for an exact quote.</p>
 </div>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="full-w s-border" style="background:var(--bg-void);">
 <div class="inner s-pad">
-  <div class="s-label reveal">04 — Contact</div>
+  <div class="s-label reveal">06 — Contact</div>
   <h2 class="s-title reveal">Let's Work<br>Together.</h2>
   <p class="s-sub reveal">I can take the stress off your plate. Reach out on any of the channels below or send a message directly.</p>
 
