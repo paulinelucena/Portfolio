@@ -868,10 +868,32 @@ section, [id], .full-w { }
 #workflow .wf-card h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--text-primary); margin-bottom: 0.85rem; font-weight: 600; line-height: 1.25; }
 #workflow .wf-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
 #workflow .wf-cta-wrap { display: flex; justify-content: center; margin-top: 1rem; }
-#workflow .wf-cta { display: inline-flex; align-items: center; gap: 0.7rem; padding: 1.05rem 2.5rem; background: linear-gradient(135deg, var(--cyan), var(--teal)); color: var(--bg-void); font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 4px; transition: all 0.3s var(--ease-out); }
-#workflow .wf-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 45px rgba(0,212,255,0.5); }
-#workflow .wf-cta i { transition: transform 0.3s var(--ease-out); }
-#workflow .wf-cta:hover i { transform: translateX(4px); }
+#workflow .wf-cta {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  padding: 1.25rem 3rem;
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--bg-void);
+  font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  border-radius: 4px;
+  transition: all 0.35s var(--ease-out);
+  box-shadow: 0 8px 32px rgba(0,212,255,0.35), 0 0 0 0 rgba(0,212,255,0);
+  position: relative; overflow: hidden;
+}
+#workflow .wf-cta::before {
+  content: '';
+  position: absolute; inset: -2px;
+  background: linear-gradient(135deg, var(--teal), var(--cyan), var(--teal));
+  border-radius: 6px; z-index: -1; opacity: 0;
+  transition: opacity 0.3s;
+}
+#workflow .wf-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0,212,255,0.55), 0 0 0 4px rgba(0,212,255,0.15);
+}
+#workflow .wf-cta:hover::before { opacity: 1; }
+#workflow .wf-cta i { font-size: 1rem; transition: transform 0.3s var(--ease-out); }
+#workflow .wf-cta:hover i { transform: rotate(15deg) scale(1.15); }
 @media (max-width: 1100px) { #workflow .wf-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 760px) {
   #workflow { padding: 5rem 1rem; }
@@ -933,9 +955,15 @@ section, [id], .full-w { }
       </div>
     </div>
     <div class="wf-cta-wrap reveal">
-      <a href="https://calendly.com/paulinelucena27/30min" target="_blank" rel="noopener noreferrer" class="wf-cta">
-        Book Free Discovery Call <i class="fa-regular fa-clock"></i>
-      </a>
+      <div style="text-align:center;">
+        <p style="font-family:var(--font-mono);font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.2rem;">Ready to get started?</p>
+        <a href="https://calendly.com/paulinelucena27/30min" target="_blank" rel="noopener noreferrer" class="wf-cta">
+          <i class="fa-regular fa-calendar-check"></i>
+          Book Free Discovery Call
+          <i class="fa-solid fa-arrow-right" style="font-size:0.8rem;"></i>
+        </a>
+        <p style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:0.9rem;">30 min · No obligation · Instant Calendly booking</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1324,9 +1352,24 @@ section, [id], .full-w { }
           <span>Or</span>
           <span style="flex:1;height:1px;background:var(--border-bright);"></span>
         </div>
-        <a href="https://calendly.com/paulinelucena27/30min" target="_blank" rel="noopener noreferrer" class="wf-cta" style="display:inline-flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;">
-          Book Free Discovery Call <i class="fa-regular fa-clock"></i>
+        <a href="https://calendly.com/paulinelucena27/30min" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;justify-content:center;gap:0.75rem;width:100%;
+                  padding:1.3rem 2rem;
+                  background:linear-gradient(135deg, var(--cyan), var(--teal));
+                  color:var(--bg-void);
+                  font-family:var(--font-mono);font-size:0.88rem;font-weight:700;
+                  letter-spacing:2px;text-transform:uppercase;
+                  border-radius:4px;text-decoration:none;
+                  box-shadow:0 8px 32px rgba(0,212,255,0.4),0 0 0 0 rgba(0,212,255,0);
+                  transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+                  position:relative;overflow:hidden;"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 20px 50px rgba(0,212,255,0.55),0 0 0 5px rgba(0,212,255,0.18)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(0,212,255,0.4),0 0 0 0 rgba(0,212,255,0)'">
+          <i class="fa-regular fa-calendar-check" style="font-size:1.1rem;"></i>
+          Book Free Discovery Call
+          <i class="fa-solid fa-arrow-right" style="font-size:0.8rem;margin-left:0.2rem;"></i>
         </a>
+        <p style="text-align:center;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:0.75rem;">30 min · No obligation · Instant Calendly booking</p>
       </form>
     </div>
   </div>
