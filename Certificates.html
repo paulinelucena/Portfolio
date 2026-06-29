@@ -323,7 +323,7 @@ nav {
       </div>
       <div class="nav-controls">
         <button class="nav-btn" onclick="navigateLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
-        <span class="nav-counter" id="lbCounter">1 / 9</span>
+        <span class="nav-counter" id="lbCounter">1 / 8</span>
         <button class="nav-btn" onclick="navigateLightbox(1)"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
@@ -369,7 +369,6 @@ const certificates = [
     skills: ['Gather and extract ending account balances from the General Ledger', 'List accounts with debit balances in the left column', 'List accounts with credit balances in the right column','Total the debit and credit columns to ensure mathematical equality','Identify and locate errors if the Trial Balance does not balance','Prepare adjustments for unrecorded transactions, depreciation, and accruals','Formulate an Adjusted Trial Balance as a basis for financial statements'],
     signatories: ['TESDA Regional Assessment Center']
   },
-  // 5-9: COLLEGE WEBINARS
   {
     src: 'Ecert 5.png',
     title: 'TESDA Module V - Preparing Financial Reports',
@@ -398,24 +397,6 @@ const certificates = [
     signatories: ['MARIA LOURDES AQUILIZAN [OIC Director IV/DICT-ILCDB]', 'KARL LEUNG [Chief Partnership and Strategy Officer / Go Philippines]', 'DICT', 'ILCDB', 'GOPHILIPPINES', 'Microsoft']
   },
   {
-    src: 'Ecert 8.png',
-    title: 'RELENTLESS: OUTLINING THE PARAMETER AND REACH THE POST',
-    type: 'Achievement & Recognition',
-    issuer: 'University of Caloocan City - BSAIS',
-    date: 'January 31, 2021.',
-    skills: ['Technical accounting competency standards', 'Professional employment strategies.'],
-    signatories: ['Remedios R. Santos, CPA, MBA [PICPA NMMC President]', "Jyzze Ozonia D.'Encabo [Regional Council President]"]
-  },
-  {
-    src: 'Ecert 9.JPG',
-    title: 'F.A.C.E (Fight, Aim, Conquer, Excel)',
-    type: 'Achievement & Recognition',
-    issuer: 'University of Caloocan City - BSAIS',
-    date: 'December 4, 2022',
-    skills: ['Financial Analyst\'s POV Webinar'],
-    signatories: ['BERNADETTE HOLANDA [Guest Speaker]', 'Zenith Camu, CPA, DPA, PhD (Adviser)']
-  },
-  {
     src: 'QuickBooksOnlineCertification.jpg',
     title: 'QuickBooks Online Accountant Certification',
     type: 'Professional ProAdvisor Certification',
@@ -429,19 +410,16 @@ const certificates = [
 // Category assignment by index:
 //   0-5  → TESDA Modules I-VI
 //   6    → DICT Webinar (CLEP)
-//   7-8  → College Webinars
-//   9    → Intuit QuickBooks ProAdvisor
+//   7    → Intuit QuickBooks ProAdvisor
 const categoryFor = (idx) => {
   if (idx <= 5) return 'tesda';
   if (idx === 6) return 'dict';
-  if (idx === 9) return 'proadvisor';
-  return 'college';
+  return 'proadvisor';
 };
 const categoryLabels = {
   proadvisor: { sub: 'INTUIT PROADVISOR', title: 'Professional ProAdvisor Certification', order: 1 },
   tesda:      { sub: 'TESDA CERTIFIED',   title: 'TESDA Certificate of Completion',                  order: 2 },
-  dict:       { sub: 'DICT WEBINAR',      title: 'DICT Webinar',                          order: 3 },
-  college:    { sub: 'COLLEGE WEBINAR',   title: 'College Webinars',                      order: 4 },
+  dict:       { sub: 'DICT WEBINAR',      title: 'DICT Webinar',                          order: 3 }
 };
 
 const sectionsRoot = document.getElementById('certSections');
