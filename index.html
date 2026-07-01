@@ -989,7 +989,6 @@ section, [id], .full-w { }
     <div class="tool-chip"><span class="tool-chip-name">MS Teams</span><span class="tool-chip-sub">Collaboration</span></div>
     <div class="tool-chip"><span class="tool-chip-name">Google Docs</span><span class="tool-chip-sub">Documents</span></div>
     <div class="tool-chip"><span class="tool-chip-name">Calendly</span><span class="tool-chip-sub">Scheduling</span></div>
-    <div class="tool-chip"><span class="tool-chip-name">Notion</span><span class="tool-chip-sub">Task Mgmt</span></div>
     <div class="tool-chip"><span class="tool-chip-name">ChatGPT</span><span class="tool-chip-sub">AI Assistant</span></div>
     <div class="tool-chip"><span class="tool-chip-name">Claude AI</span><span class="tool-chip-sub">AI Assistant</span></div>
   </div>
@@ -1317,7 +1316,7 @@ section, [id], .full-w { }
       <div class="pricing-tagline">For freelancers or small businesses that need clean books without the overhead.</div>
       <div class="pricing-from">Starting from</div>
       <div class="pricing-rate">$7<span style="font-size:1.2rem;">/hr</span></div>
-      <div class="pricing-unit">or from $1000 / month · billed monthly</div>
+      <div class="pricing-unit">or from $1120 / month · billed weekly</div>
       <ul class="pricing-features">
         <li><i class="fa-solid fa-check"></i>Bank reconciliation (up to 1 account)</li>
         <li><i class="fa-solid fa-check"></i>Invoice creation & delivery</li>
@@ -1335,7 +1334,7 @@ section, [id], .full-w { }
       <div class="pricing-tagline">For growing businesses that need a reliable ongoing finance & admin partner.</div>
       <div class="pricing-from">Starting from</div>
       <div class="pricing-rate">$13<span style="font-size:1.2rem;">/hr</span></div>
-      <div class="pricing-unit">or from $2080 / month · billed monthly</div>
+      <div class="pricing-unit">or from $2080 / month · billed weekly</div>
       <ul class="pricing-features">
         <li><i class="fa-solid fa-check"></i>Everything in Essentials</li>
         <li><i class="fa-solid fa-check"></i>Multi-account reconciliation</li>
@@ -1451,12 +1450,12 @@ section, [id], .full-w { }
             <td class="compare-row-label">Est. total</td>
             <td class="compare-col" data-col="essentials">
               <div class="compare-total" data-total-for="essentials">$21</div>
-              <div class="compare-total-note">per week, billed monthly</div>
+              <div class="compare-total-note">per week, billed weekly</div>
               <div class="compare-monthly" data-monthly-for="essentials">$84/mo</div>
             </td>
             <td class="compare-col is-featured" data-col="growth">
               <div class="compare-total" data-total-for="growth">$60</div>
-              <div class="compare-total-note">per week, billed monthly</div>
+              <div class="compare-total-note">per week, billed weekly</div>
               <div class="compare-monthly" data-monthly-for="growth">$240/mo</div>
             </td>
             <td class="compare-col" data-col="custom">
@@ -1893,7 +1892,7 @@ if (contactForm) {
       const weeklyTotal = plan.rate * hoursPerWeek + fee;
       const monthlyTotal = weeklyTotal * 4;
       totalEl.textContent = '$' + weeklyTotal.toLocaleString();
-      if (noteEl) noteEl.textContent = `${hoursPerWeek} hrs/week · billed monthly`;
+      if (noteEl) noteEl.textContent = `${hoursPerWeek} hrs/week · billed weekly`;
       if (monthlyEl) monthlyEl.textContent = '$' + monthlyTotal.toLocaleString() + '/mo';
     }
     totalEl.style.transform = 'scale(1.06)';
