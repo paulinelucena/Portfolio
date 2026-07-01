@@ -1317,7 +1317,7 @@ section, [id], .full-w { }
       <div class="pricing-tagline">For freelancers or small businesses that need clean books without the overhead.</div>
       <div class="pricing-from">Starting from</div>
       <div class="pricing-rate">$7<span style="font-size:1.2rem;">/hr</span></div>
-      <div class="pricing-unit">or from $1120 / month · billed monthly</div>
+      <div class="pricing-unit">or from $1000 / month · billed monthly</div>
       <ul class="pricing-features">
         <li><i class="fa-solid fa-check"></i>Bank reconciliation (up to 1 account)</li>
         <li><i class="fa-solid fa-check"></i>Invoice creation & delivery</li>
@@ -1929,7 +1929,7 @@ if (contactForm) {
 
       if (msg) {
         if (planKey === 'custom') {
-          msg.value = "Hi Pauline, I'm interested in the Done-For-You package and would like a custom quote — here's a bit about what I need: ";
+          msg.value = "Hi! I'm interested in the Done-For-You package and would like a custom quote — here's a bit about what I need: ";
         } else {
           const hoursInput = document.querySelector(`td[data-col="${planKey}"] input.compare-hours-input`);
           const daysInput = document.querySelector(`td[data-col="${planKey}"] input.compare-days-input`);
@@ -1940,7 +1940,7 @@ if (contactForm) {
           const hours = hpd * dpw;
           const isRush = rushRadio && parseInt(rushRadio.value, 10) > 0;
           const planLabel = plans[planKey] ? plans[planKey].name : planKey;
-          msg.value = `Hi Pauline, I'm interested in the ${planLabel} package at ~${hpd} hrs/day × ${dpw} days (${hours} hrs/week)` +
+          msg.value = `Hi! I'm interested in the ${planLabel} package at ~${hpd} hrs/day × ${dpw} days (${hours} hrs/week)` +
             (isRush ? ' with rush turnaround' : '') +
             (totalEl ? ` (est. ${totalEl.textContent}/week).` : '.') +
             ' A bit about my business: ';
