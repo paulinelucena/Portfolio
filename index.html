@@ -722,7 +722,7 @@ section, [id], .full-w { }
       &gt; <span id="hero-typewriter"></span><span class="cursor-blink">_</span>
     </div>
     <div class="hero-cta-row">
-      <a href="#contact" class="btn-primary">Book a free 30-min consult</a>
+      <a href="#contact" class="btn-primary">Book a free 20-min consult</a>
       <a href="#services" class="btn-ghost">See what I handle →</a>
     </div>
   </div>
@@ -1816,12 +1816,25 @@ if (contactForm) {
     e.preventDefault();
     const fd = new FormData(contactForm);
     const formBtn = document.getElementById('form-btn');
+    const status = document.getElementById('form-status');
     formBtn.disabled = true;
     formBtn.textContent = 'Sending…';
+
+    // Safety net: never let the button hang forever, even if the
+    // request stalls (slow network, dropped connection, etc.)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s max wait
+
     try {
-      const res = await fetch('https://formspree.io/f/mwpzaovr', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+      const res = await fetch('https://formspree.io/f/mwpzaovr', {
+        method: 'POST',
+        body: fd,
+        headers: { Accept: 'application/json' },
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
       if (res.ok) {
-        const status = document.getElementById('form-status');
         status.textContent = '✓ Message sent. Replying within 1 business day.';
         status.style.display = 'block';
         status.style.color = 'var(--teal)';
@@ -1831,9 +1844,33 @@ if (contactForm) {
           formBtn.textContent = 'Send brief →';
           status.style.display = 'none';
         }, 4000);
+      } else {
+        // This was the bug: a non-OK response (rate limit, validation
+        // error, paused form, etc.) previously fell through with no
+        // handling at all, leaving the button stuck on "Sending…" forever.
+        let message = 'Something went wrong. Please try again or email me directly.';
+        try {
+          const data = await res.json();
+          if (data && data.errors && data.errors.length) {
+            message = data.errors.map(er => er.message).join(' ');
+          }
+        } catch (_) { /* response wasn't JSON, use default message */ }
+
+        status.textContent = '✕ ' + message;
+        status.style.display = 'block';
+        status.style.color = '#ff6b6b';
+        formBtn.disabled = false;
+        formBtn.textContent = 'Send brief →';
       }
     } catch (err) {
+      clearTimeout(timeoutId);
       console.error(err);
+      const timedOut = err.name === 'AbortError';
+      status.textContent = timedOut
+        ? '✕ Request timed out. Please check your connection and try again.'
+        : '✕ Could not send. Please try again or email me directly.';
+      status.style.display = 'block';
+      status.style.color = '#ff6b6b';
       formBtn.disabled = false;
       formBtn.textContent = 'Send brief →';
     }
