@@ -1512,7 +1512,9 @@ section, [id], .full-w { }
 
     <div class="reveal d2">
       <form class="contact-form" id="contact-form">
-        <input type="hidden" name="_subject" value="New Portfolio Inquiry — Pauline Lucena">
+        <input type="hidden" name="access_key" value="5a482a37-6ef2-4b78-b69d-07f239f4be34">
+        <input type="hidden" name="subject" value="New Portfolio Inquiry — Pauline Lucena">
+        <input type="hidden" name="from_name" value="Portfolio Contact Form">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" for="fc-name">Your name</label>
@@ -1826,7 +1828,7 @@ if (contactForm) {
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s max wait
 
     try {
-      const res = await fetch('https://formspree.io/f/mwpzaovr', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: fd,
         headers: { Accept: 'application/json' },
@@ -1834,7 +1836,9 @@ if (contactForm) {
       });
       clearTimeout(timeoutId);
 
-      if (res.ok) {
+      const data = await res.json().catch(() => null);
+
+      if (res.ok && data && data.success) {
         status.textContent = '✓ Message sent. Replying within 1 business day.';
         status.style.display = 'block';
         status.style.color = 'var(--teal)';
@@ -1845,17 +1849,9 @@ if (contactForm) {
           status.style.display = 'none';
         }, 4000);
       } else {
-        // This was the bug: a non-OK response (rate limit, validation
-        // error, paused form, etc.) previously fell through with no
-        // handling at all, leaving the button stuck on "Sending…" forever.
-        let message = 'Something went wrong. Please try again or email me directly.';
-        try {
-          const data = await res.json();
-          if (data && data.errors && data.errors.length) {
-            message = data.errors.map(er => er.message).join(' ');
-          }
-        } catch (_) { /* response wasn't JSON, use default message */ }
-
+        // Non-OK response, or Web3Forms returned success:false — surface
+        // the real reason instead of leaving the button stuck forever.
+        const message = (data && data.message) || 'Something went wrong. Please try again or email me directly.';
         status.textContent = '✕ ' + message;
         status.style.display = 'block';
         status.style.color = '#ff6b6b';
