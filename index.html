@@ -1150,6 +1150,82 @@ section, [id], .full-w { }
 @media (max-width: 768px) {
   .result-card { padding: 1.5rem; }
 }
+
+/* ── PRICING VIEW TOGGLE ── */
+.pricing-view-toggle {
+  display:inline-flex; align-items:center; gap:0.2rem;
+  padding:0.3rem; border:1px solid var(--border-bright); border-radius:3px;
+  background:rgba(0,212,255,0.03); margin-bottom:3rem;
+}
+.view-toggle-btn {
+  font-family:var(--font-mono); font-size:0.68rem; letter-spacing:1.5px; text-transform:uppercase;
+  padding:0.65rem 1.3rem; border-radius:2px; border:none; background:transparent;
+  color:var(--text-muted); cursor:pointer; transition:all 0.3s var(--ease-out);
+}
+.view-toggle-btn.active { background:var(--cyan); color:var(--bg-void); font-weight:700; box-shadow:0 0 16px var(--cyan-glow); }
+.view-toggle-btn:not(.active):hover { color:var(--cyan); }
+.pricing-view { display:none; }
+.pricing-view.active { display:block; }
+
+/* ── COMPARE TABLE (calculator-style, inspired by marketplace comparison layouts) ── */
+.compare-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:4px; background:var(--bg-card); }
+.compare-table { width:100%; border-collapse:collapse; min-width:680px; }
+.compare-table th, .compare-table td { padding:1.4rem 1.6rem; border-bottom:1px solid var(--border); vertical-align:top; }
+.compare-table tr:last-child th, .compare-table tr:last-child td { border-bottom:none; }
+
+.compare-row-label {
+  font-family:var(--font-mono); font-size:0.68rem; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--text-muted); width:180px; white-space:nowrap;
+}
+.compare-table thead th { border-bottom:1px solid var(--border-bright); }
+.compare-col { width:26%; text-align:left; position:relative; }
+.compare-col.is-featured { background:linear-gradient(180deg, rgba(0,212,255,0.05), transparent 60%); }
+
+.compare-badge {
+  display:inline-block; margin-bottom:0.75rem;
+  font-family:var(--font-mono); font-size:0.6rem; letter-spacing:2px; text-transform:uppercase;
+  background:var(--cyan); color:var(--bg-void); padding:0.3rem 0.7rem; border-radius:2px; font-weight:700;
+  box-shadow:0 0 18px rgba(0,212,255,0.35);
+}
+.compare-tier { font-family:var(--font-mono); font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:0.5rem; }
+.compare-price { font-family:var(--font-display); font-size:1.9rem; font-weight:800; color:var(--text-primary); line-height:1; }
+.compare-price span { font-size:0.9rem; color:var(--text-muted); font-family:var(--font-mono); font-weight:400; }
+.compare-name { font-family:var(--font-display); font-weight:700; font-size:1.05rem; margin:0.55rem 0 0.7rem; color:var(--text-primary); }
+.compare-desc { font-size:0.85rem; color:var(--text-secondary); line-height:1.6; }
+
+.compare-radio-opt {
+  display:flex; align-items:center; gap:0.6rem; font-size:0.85rem; color:var(--text-secondary);
+  margin-bottom:0.7rem; cursor:pointer; user-select:none;
+}
+.compare-radio-opt input { accent-color: var(--cyan); width:15px; height:15px; cursor:pointer; }
+.compare-radio-opt .fee { color:var(--teal); font-family:var(--font-mono); font-size:0.75rem; }
+.compare-radio-opt:last-child { margin-bottom:0; }
+
+.compare-hours-input {
+  width:90px; background:var(--bg-surface); border:1px solid var(--border-bright); color:var(--text-primary);
+  font-family:var(--font-mono); font-size:0.95rem; padding:0.6rem 0.8rem; border-radius:2px;
+  transition:border-color 0.3s;
+}
+.compare-hours-input:focus { outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px var(--cyan-glow); }
+.compare-hours-input:disabled { opacity:0.4; cursor:not-allowed; }
+
+.compare-total { font-family:var(--font-display); font-size:1.7rem; font-weight:800; color:var(--teal); }
+.compare-total-note { font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); margin-top:0.3rem; letter-spacing:0.5px; }
+
+.compare-select-btn {
+  display:block; width:100%; text-align:center; margin-top:1rem;
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase;
+  background:transparent; color:var(--cyan); border:1px solid var(--border-bright);
+  padding:0.85rem 1rem; border-radius:2px; cursor:pointer; transition:all 0.3s;
+}
+.compare-select-btn:hover { background:var(--cyan); color:var(--bg-void); box-shadow:0 0 20px var(--cyan-glow); }
+.compare-col.is-featured .compare-select-btn { background:var(--cyan); color:var(--bg-void); border-color:var(--cyan); }
+.compare-col.is-featured .compare-select-btn:hover { box-shadow:0 0 26px rgba(0,212,255,0.45); transform:translateY(-1px); }
+
+@media (max-width: 640px) {
+  .compare-table th, .compare-table td { padding:1.1rem 1.1rem; }
+  .compare-row-label { width:110px; font-size:0.6rem; }
+}
 </style>
 
 <div id="proof" class="full-w s-border">
@@ -1226,6 +1302,12 @@ section, [id], .full-w { }
   <h2 class="s-title reveal">Simple, Transparent<br>Starting Points.</h2>
   <p class="s-sub reveal">Every business is different — these tiers are a guide, not a ceiling. Book a free call and I'll quote exactly what your situation needs.</p>
 
+  <div class="pricing-view-toggle reveal">
+    <button class="view-toggle-btn active" data-view="cards" type="button">Overview</button>
+    <button class="view-toggle-btn" data-view="compare" type="button">Compare &amp; Calculate</button>
+  </div>
+
+  <div class="pricing-view active" id="pricing-view-cards">
   <div class="pricing-grid">
 
     <div class="pricing-card reveal d1">
@@ -1283,6 +1365,120 @@ section, [id], .full-w { }
 
   </div>
   <p class="pricing-note reveal">All prices are starting points and vary by scope, tools, and transaction volume. <a href="#contact">Book a free call</a> for an exact quote.</p>
+  </div><!-- /pricing-view-cards -->
+
+  <div class="pricing-view" id="pricing-view-compare">
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th class="compare-row-label">Package</th>
+            <th class="compare-col">
+              <div class="compare-tier">Starter</div>
+              <div class="compare-price">$7<span>/hr</span></div>
+              <div class="compare-name">Essentials</div>
+              <div class="compare-desc">Clean books without the overhead — reconciliation, invoicing, monthly reports.</div>
+            </th>
+            <th class="compare-col is-featured">
+              <span class="compare-badge">Most Popular</span>
+              <div class="compare-tier">Growth</div>
+              <div class="compare-price">$10<span>/hr</span></div>
+              <div class="compare-name">Full Support</div>
+              <div class="compare-desc">An ongoing finance &amp; admin partner — AR/AP, reporting, weekly check-ins.</div>
+            </th>
+            <th class="compare-col">
+              <div class="compare-tier">Custom</div>
+              <div class="compare-price" style="font-size:1.3rem;">Let's talk</div>
+              <div class="compare-name">Done-For-You</div>
+              <div class="compare-desc">Catch-up projects and full VA scope, quoted around your exact workload.</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="compare-row-label">Turnaround</td>
+            <td class="compare-col" data-col="essentials">
+              <label class="compare-radio-opt">
+                <input type="radio" name="turn-essentials" value="0" checked> Standard (3–5 days)
+              </label>
+              <label class="compare-radio-opt">
+                <input type="radio" name="turn-essentials" value="15"> Rush (48 hrs) <span class="fee">+$15</span>
+              </label>
+            </td>
+            <td class="compare-col is-featured" data-col="growth">
+              <label class="compare-radio-opt">
+                <input type="radio" name="turn-growth" value="0" checked> Standard (2–3 days)
+              </label>
+              <label class="compare-radio-opt">
+                <input type="radio" name="turn-growth" value="20"> Rush (24 hrs) <span class="fee">+$20</span>
+              </label>
+            </td>
+            <td class="compare-col" data-col="custom">
+              <label class="compare-radio-opt">
+                <input type="radio" name="turn-custom" value="0" checked> Scoped on call
+              </label>
+              <label class="compare-radio-opt">
+                <input type="radio" name="turn-custom" value="0"> Priority (by request)
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td class="compare-row-label">Hours / day</td>
+            <td class="compare-col" data-col="essentials">
+              <input type="number" class="compare-hours-input" data-rate="7" min="1" max="12" value="3">
+            </td>
+            <td class="compare-col is-featured" data-col="growth">
+              <input type="number" class="compare-hours-input" data-rate="10" min="1" max="12" value="4">
+            </td>
+            <td class="compare-col" data-col="custom">
+              <span style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted);">Scoped per project</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="compare-row-label">Days / week</td>
+            <td class="compare-col" data-col="essentials">
+              <input type="number" class="compare-hours-input compare-days-input" min="1" max="7" value="5">
+            </td>
+            <td class="compare-col is-featured" data-col="growth">
+              <input type="number" class="compare-hours-input compare-days-input" min="1" max="7" value="5">
+            </td>
+            <td class="compare-col" data-col="custom">
+              <span style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-muted);">Scoped per project</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="compare-row-label">Est. total</td>
+            <td class="compare-col" data-col="essentials">
+              <div class="compare-total" data-total-for="essentials">$21</div>
+              <div class="compare-total-note">per week, billed monthly</div>
+            </td>
+            <td class="compare-col is-featured" data-col="growth">
+              <div class="compare-total" data-total-for="growth">$60</div>
+              <div class="compare-total-note">per week, billed monthly</div>
+            </td>
+            <td class="compare-col" data-col="custom">
+              <div class="compare-total">Custom</div>
+              <div class="compare-total-note">priced on scope</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="compare-row-label"></td>
+            <td class="compare-col" data-col="essentials">
+              <button type="button" class="compare-select-btn" data-select="essentials">Select →</button>
+            </td>
+            <td class="compare-col is-featured" data-col="growth">
+              <button type="button" class="compare-select-btn" data-select="growth">Select →</button>
+            </td>
+            <td class="compare-col" data-col="custom">
+              <button type="button" class="compare-select-btn" data-select="custom">Select →</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pricing-note reveal">Adjust hours/day, days/week, and turnaround to see your weekly estimate update live — then hit Select to send it straight to the inquiry form.</p>
+  </div><!-- /pricing-view-compare -->
+
 </div>
 </div>
 
@@ -1641,6 +1837,115 @@ if (contactForm) {
     }
   });
 }
+
+// ── PRICING: VIEW TOGGLE ──
+(function () {
+  const toggleBtns = document.querySelectorAll('.view-toggle-btn');
+  const views = {
+    cards: document.getElementById('pricing-view-cards'),
+    compare: document.getElementById('pricing-view-compare'),
+  };
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      Object.values(views).forEach(v => v && v.classList.remove('active'));
+      const target = views[btn.dataset.view];
+      if (target) target.classList.add('active');
+    });
+  });
+})();
+
+// ── PRICING: LIVE COMPARE CALCULATOR ──
+(function () {
+  const plans = {
+    essentials: { rate: 7, name: 'Essentials ($7/hr)' },
+    growth: { rate: 10, name: 'Full Support ($10/hr)' },
+  };
+
+  function calcTotal(planKey) {
+    const plan = plans[planKey];
+    if (!plan) return;
+    const hoursInput = document.querySelector(`td[data-col="${planKey}"] input.compare-hours-input`);
+    const daysInput = document.querySelector(`td[data-col="${planKey}"] input.compare-days-input`);
+    const rushRadio = document.querySelector(`input[name="turn-${planKey}"]:checked`);
+    const totalEl = document.querySelector(`[data-total-for="${planKey}"]`);
+    const noteEl = totalEl ? totalEl.parentElement.querySelector('.compare-total-note') : null;
+    if (!hoursInput || !daysInput || !totalEl) return;
+    const fee = rushRadio ? parseInt(rushRadio.value, 10) || 0 : 0;
+    const isRush = fee > 0;
+    const hpdRaw = parseInt(hoursInput.value, 10);
+    const dpwRaw = parseInt(daysInput.value, 10);
+    const hasHours = !isNaN(hpdRaw) && hpdRaw > 0;
+    const hasDays = !isNaN(dpwRaw) && dpwRaw > 0;
+    if (isRush && (!hasHours || !hasDays)) {
+      totalEl.textContent = '$' + fee.toLocaleString();
+      if (noteEl) noteEl.textContent = 'rush fee · set hours to estimate';
+    } else {
+      const hoursPerDay = hasHours ? hpdRaw : 1;
+      const daysPerWeek = hasDays ? Math.min(7, dpwRaw) : 1;
+      const hoursPerWeek = hoursPerDay * daysPerWeek;
+      const total = plan.rate * hoursPerWeek + fee;
+      totalEl.textContent = '$' + total.toLocaleString();
+      if (noteEl) noteEl.textContent = `${hoursPerWeek} hrs/week · billed monthly`;
+    }
+    totalEl.style.transform = 'scale(1.06)';
+    totalEl.style.transition = 'transform 0.25s var(--ease-out)';
+    requestAnimationFrame(() => { totalEl.style.transform = 'scale(1)'; });
+  }
+
+  ['essentials', 'growth'].forEach(planKey => {
+    const hoursInput = document.querySelector(`td[data-col="${planKey}"] input.compare-hours-input`);
+    const daysInput = document.querySelector(`td[data-col="${planKey}"] input.compare-days-input`);
+    if (hoursInput) hoursInput.addEventListener('input', () => calcTotal(planKey));
+    if (daysInput) daysInput.addEventListener('input', () => calcTotal(planKey));
+    document.querySelectorAll(`input[name="turn-${planKey}"]`).forEach(r => {
+      r.addEventListener('change', () => calcTotal(planKey));
+    });
+    calcTotal(planKey);
+  });
+
+  // ── SELECT → prefill contact form ──
+  const needMap = {
+    essentials: 'Accounting / Bookkeeping Support',
+    growth: 'Accounting / Bookkeeping Support',
+    custom: "Not sure — let's talk",
+  };
+
+  document.querySelectorAll('.compare-select-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const planKey = btn.dataset.select;
+      const needSelect = document.getElementById('fc-need');
+      const msg = document.getElementById('fc-msg');
+
+      if (needSelect && needMap[planKey]) needSelect.value = needMap[planKey];
+
+      if (msg) {
+        if (planKey === 'custom') {
+          msg.value = "Hi Pauline, I'm interested in the Done-For-You package and would like a custom quote — here's a bit about what I need: ";
+        } else {
+          const hoursInput = document.querySelector(`td[data-col="${planKey}"] input.compare-hours-input`);
+          const daysInput = document.querySelector(`td[data-col="${planKey}"] input.compare-days-input`);
+          const rushRadio = document.querySelector(`input[name="turn-${planKey}"]:checked`);
+          const totalEl = document.querySelector(`[data-total-for="${planKey}"]`);
+          const hpd = hoursInput ? parseInt(hoursInput.value, 10) || 0 : 0;
+          const dpw = daysInput ? parseInt(daysInput.value, 10) || 0 : 0;
+          const hours = hpd * dpw;
+          const isRush = rushRadio && parseInt(rushRadio.value, 10) > 0;
+          const planLabel = plans[planKey] ? plans[planKey].name : planKey;
+          msg.value = `Hi Pauline, I'm interested in the ${planLabel} package at ~${hpd} hrs/day × ${dpw} days (${hours} hrs/week)` +
+            (isRush ? ' with rush turnaround' : '') +
+            (totalEl ? ` (est. ${totalEl.textContent}/week).` : '.') +
+            ' A bit about my business: ';
+        }
+      }
+
+      const contactSection = document.getElementById('contact');
+      if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => { if (msg) { msg.focus(); msg.setSelectionRange(msg.value.length, msg.value.length); } }, 500);
+    });
+  });
+})();
 
 // ── PORTRAIT RING ANIMATION ──
 const style = document.createElement('style');
