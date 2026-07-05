@@ -404,6 +404,15 @@ const certificates = [
     date: 'June 10, 2026',
     skills: ['QuickBooks Online Accountant Setup & Navigation', 'Client Management & Books Review', 'Banking, Reconciliation & Transactions', 'Reporting & Financial Statement Preparation', 'Payroll, Sales Tax & Advanced Features'],
     signatories: ['Amanda Newton [GTM Segment Lead, Accountant Channel – Rest of World Portfolio]', 'Intuit QuickBooks']
+  },
+  {
+    src: 'Ecert 9.jpg',
+    title: 'Xero Advisor Certification (Level 1)',
+    type: 'Xero Associate Certification',
+    issuer: 'Xero Central',
+    date: 'July 6, 2026',
+    skills: ['Prepare to use Xero', 'Complete basic settings', 'Get started with sales in Xero', 'Get started with purchases in Xero', "An overview of Xero's bank reconciliation", 'Get bank statement lines into Xero', 'Reconcile basic bank statement lines in Xero', 'Track how your business is performing'],
+    signatories: ['Vikki Bean [GM - Education & Content Delivery, Xero]', 'Xero Central']
   }
 ];
 
@@ -411,15 +420,18 @@ const certificates = [
 //   0-5  → TESDA Modules I-VI
 //   6    → DICT Webinar (CLEP)
 //   7    → Intuit QuickBooks ProAdvisor
+//   8    → Xero Advisor Certification
 const categoryFor = (idx) => {
   if (idx <= 5) return 'tesda';
   if (idx === 6) return 'dict';
-  return 'proadvisor';
+  if (idx === 7) return 'proadvisor';
+  return 'xero';
 };
 const categoryLabels = {
   proadvisor: { sub: 'INTUIT PROADVISOR', title: 'Professional ProAdvisor Certification', order: 1 },
-  tesda:      { sub: 'TESDA CERTIFIED',   title: 'TESDA Certificate of Completion',                  order: 2 },
-  dict:       { sub: 'DICT WEBINAR',      title: 'DICT Webinar',                          order: 3 }
+  xero:       { sub: 'XERO CERTIFIED',    title: 'Xero Advisor Certification',           order: 2 },
+  tesda:      { sub: 'TESDA CERTIFIED',   title: 'TESDA Certificate of Completion',                  order: 3 },
+  dict:       { sub: 'DICT WEBINAR',      title: 'DICT Webinar',                          order: 4 }
 };
 
 const sectionsRoot = document.getElementById('certSections');
